@@ -1,10 +1,23 @@
 import React from 'react'
 
-import { ExampleComponent } from 'react-upload-2-express'
-import 'react-upload-2-express/dist/index.css'
+import  SimpleComponent  from 'react-upload-2-express'
 
-const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+const RenderDom = ({url}) => (
+  <>
+  <input type='hidden' value={url} name='user[profile_image_url]' />
+  </>
+)
+
+export default ({}) => {
+  return(
+    <>
+      {/* <UploadElement projectId='project_avatar' domain={domain} showLink={false} RenderDom={RenderDom} /> */}
+
+      <SimpleComponent projectId='user_avatar'
+
+      showLink={true}
+      RenderDom={RenderDom}
+       />
+    </>
+  )
 }
-
-export default App
