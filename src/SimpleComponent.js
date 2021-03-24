@@ -10,6 +10,9 @@ export default ({
   buildUidFunc = () => {
     return new Date().getTime()
   },
+  secret = null,
+  mainAttribute = null,
+  secondAttribute = null,
   showLink = true,
   panelClass = null,
   defaultUploadedUrl = null,
@@ -36,20 +39,20 @@ export default ({
     }
   }
 
-  useEffect(() => {
+  const qrcode = (e) => {
+    e.preventDefault()
     uploadHelper = new UploadHelper({
       uploadPanel: uploadPanel.current,
       projectId: projectId,
       qrcodeWidth: 160,
       domain: domain
     })
-  }, [])
-
-  const qrcode = (e) => {
-    e.preventDefault()
     uploadHelper.uploadByQrScan({
       userId: userId,
       uid: getUid(),
+      secret: secret,
+      mainAttribute: mainAttribute,
+      secondAttribute: secondAttribute,
       updateFunction: (url) => {
         updatedFunc(url)
         setUploadUrl(url)
@@ -60,9 +63,16 @@ export default ({
 
   const click = (e) => {
     e.preventDefault()
+    uploadHelper = new UploadHelper({
+      uploadPanel: uploadPanel.current,
+      projectId: projectId,
+      qrcodeWidth: 160,
+      domain: domain
+    })
     uploadHelper.uploadByBrowser({
       userId: userId,
       uid: getUid(),
+      secret: secret,
       updateFunction: (url) => {
         updatedFunc(url)
         setUploadUrl(url)

@@ -42,10 +42,10 @@ import React, { Component } from 'react'
 
 import Upload2Express from 'react-upload-2-express'
 
-class Example extends Component {
-  render() {
-    return <Upload2Express />
-  }
+const ele = ({url}) => (<p>{url}</p>)
+
+const Example = ()  =>  {
+  return <Upload2Express projectId="demo" RenderDom={ele} />
 }
 ```
 
